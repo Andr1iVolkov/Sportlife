@@ -1,0 +1,66 @@
+﻿@model Sportlife.Models.Gym.ShowListGymViewModel
+
+@{
+    var selectedCityId = ViewBag.SelectedCityId as int?;
+    var cities = ViewBag.Cities as SelectList;
+}
+
+<div class="main-page">
+    <h1>Клуби</h1>
+
+    <div class="city-filter">
+        <label for="citySelect">Виберіть місто:</label>
+        <select id="citySelect" name="city" onchange="filterGymsByCity()">
+            <option value="Київ" selected>Київ</option>
+            @foreach (var city in Model.Cities)
+            {
+                <option value="@city.Name">@city.Name</option>
+            }
+        </select>
+    </div>
+
+
+
+
+    <ul class="ul-gyms-card" id="gymsList">
+        @if (Model != null && Model.Gyms.Any())
+        {
+            @foreach (var gym in Model.Gyms)
+            {
+                <li>
+                    <div class="div-card">
+                        <div class="div-photo">
+                            <img src="@gym.MainImage" alt="photo">
+                        </div>
+                        <div class="under-photo">
+                            <h2>@gym.ShortAddress</h2>
+                            <h3>@gym.City.Name @gym.FullAddress</h3>
+                            <h3>Клуб формату @gym.Format</h3>
+                            <button>Більше про клуб</button>
+                        </div>
+                    </div>
+                </li>
+            }
+        }
+    </ul>
+</div>
+
+
+
+
+<script>
+    function filterGymsByCity() {
+        var selectedCity = document.getElementById("citySelect").value;
+
+        $.ajax({
+            url: '@Url.Action("ShowListGym", "Gym")',
+            type: 'GET',
+            data: { 'City.Name': selectedCity },
+            success: function (data) {
+                // Заменяем содержимое списка
+                $('#gymsList').html(data);
+            }
+        });
+    }
+
+</script>

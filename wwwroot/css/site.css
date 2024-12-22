@@ -20,3 +20,91 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.ul-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.ul-header li {
+    margin-right: 30px;
+}
+
+.div-main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background-color: black;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding-left: 320px;
+    padding-right: 100px;
+}
+
+ul {
+    list-style: none;
+}
+
+.nav-link img {
+    width: 238px;
+    height: 40px;
+}
+
+.div-card {
+    display: flex;
+    flex-direction: column;
+    width: 404px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.div-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 10px;
+}
+
+.ul-gyms-card {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.ul-gyms-card li {
+    margin-right: 50px;
+    margin-bottom: 100px;
+}
+   
+
+.under-photo * {
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.main-page {
+    display: flex;
+    width: 100%;
+    padding-left: 100px;
+    padding-right: 100px;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 100px;
+}

@@ -27,7 +27,5 @@ namespace Sportlife.Data.Entities
 
         [Required, StringLength(200)]
         public string PhoneNumber { get; set; }
-
-
     }
 }

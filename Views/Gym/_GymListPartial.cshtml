@@ -1,0 +1,23 @@
+﻿@model Sportlife.Models.Gym.ShowListGymViewModel
+
+<ul class="ul-gyms-card">
+    @if (Model != null && Model.Gyms.Any())
+    {
+        @foreach (var gym in Model.Gyms)
+        {
+            <li>
+                <div class="div-card">
+                    <div class="div-photo">
+                        <img src="@gym.MainImage" alt="photo">
+                    </div>
+                    <div class="under-photo">
+                        <h2>@gym.ShortAddress</h2>
+                        <h3>@gym.City.Name @gym.FullAddress</h3>
+                        <h3>Клуб формату @gym.Format</h3>
+                        <button>Більше про клуб</button>
+                    </div>
+                </div>
+            </li>
+        }
+    }
+</ul>
