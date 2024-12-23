@@ -1,0 +1,77 @@
+﻿@model Sportlife.Models.Coach.CityGymCoachViewModel
+
+<div class="main-page">
+    <h2>Тренери</h2>
+
+    <label for="cityDropdown">Місто:</label>
+    <select id="cityDropdown" class="form-select" asp-for="SelectedCityId" asp-items="@(new SelectList(Model.Cities, "Id", "Name", Model.SelectedCityId))"></select>
+
+    <label for="gymDropdown">Зал:</label>
+    <select id="gymDropdown" class="form-select" asp-for="SelectedGymId" asp-items="@(new SelectList(Model.Gyms, "Id", "ShortAddress", Model.SelectedGymId))"></select>
+
+    <ul class="ul-coach-card">
+        @foreach (var coach in Model.Coaches)
+        {
+            <li>
+                <div class="div-card-coach">
+                    <div class="div-card-coach-img">
+                        <img src="@coach.MainImage" alt="@coach.FirstName">
+                    </div>
+
+                    <div>
+                        <h2>@coach.FirstName @coach.SecondName</h2>
+                        <p>@coach.ShortDescription</p>
+                        <h4>@coach.Quote</h4>
+                    </div>
+                </div>
+            </li>
+        }
+    </ul>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#cityDropdown').change(function () {
+                var cityId = $(this).val();
+
+                $.getJSON('/Coaches/GetGymsByCity', { cityId: cityId }, function (gyms) {
+                    var gymDropdown = $('#gymDropdown');
+                    gymDropdown.empty();
+
+                    gyms.forEach(function (gym) {
+                        gymDropdown.append(new Option(gym.shortAddress, gym.id));
+                    });
+
+                    gymDropdown.trigger('change');
+                });
+            });
+
+            $('#gymDropdown').change(function () {
+                var gymId = $(this).val();
+
+                $.getJSON('/Coaches/GetCoachesByGym', { gymId: gymId }, function (coaches) {
+                    var coachCards = $('.ul-coach-card');
+                    coachCards.empty();
+
+                    coaches.forEach(function (coach) {
+                        var cardHtml = `
+                                    <li>
+                                        <div class="div-card-coach">
+                                            <div class="div-card-coach-img">
+                                                <img src="${coach.mainImage}" alt="${coach.firstName}">
+                                            </div>
+                                            <div>
+                                                <h2>${coach.firstName} ${coach.secondName}</h2>
+                                                <p>${coach.shortDescription}</p>
+                                                <h4>${coach.quote}</h4>
+                                            </div>
+                                        </div>
+                                    </li>`;
+                        coachCards.append(cardHtml);
+                    });
+                });
+            });
+        });
+    </script>
+}

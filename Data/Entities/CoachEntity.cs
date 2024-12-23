@@ -28,5 +28,6 @@ namespace Sportlife.Data.Entities
         [ForeignKey("Gym")]
         public int GymId { get; set; }
         public virtual GymEntity Gym { get; set; }
+        public virtual ICollection<CoachCategoryTrainingEntity> CoachCategoriesTraining { get; set; }
     }
 }

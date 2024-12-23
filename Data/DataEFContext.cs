@@ -12,6 +12,8 @@ namespace Sportlife.Data
         public DbSet<CityEntity> Cities { get; set; }
         public DbSet<GymEntity> Gyms { get; set; }
         public DbSet<CoachEntity> Coaches { get; set; }
+        public DbSet<TrainingCategoryEntity> TrainingCategories { get; set; }
+        public DbSet<CoachCategoryTrainingEntity> CoachCategoryTraining { get; set; }
 
     }
 }
